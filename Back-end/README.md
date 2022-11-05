@@ -10,8 +10,14 @@ $ python3 -m venv venv
 $ . venv/bin/activate
 $ pip install Flask
 
+!If Vue isn't downloaded then!
+npm install -g @vue/cli
+# OR
+yarn global add @vue/cli
+
 To run: $flask --app main run
 Debug mode: $flask --app main --debug run
+
 
 !!HMTL Escaping!!
 

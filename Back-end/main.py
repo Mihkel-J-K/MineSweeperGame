@@ -10,6 +10,6 @@ def hello_world():
 def index():
     return 'Index Page'
 
-@app.route('/mihkelTest')
-def getTested():
+@app.route('/mihkelTest/<int:post_id>')
+def getTested(post_id):
     return render_template('mihkelTest.html')
