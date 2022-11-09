@@ -1,18 +1,18 @@
-#!Before start on Windows!
+# !Before start on Windows!
 Go to Back-end directory in cmd and type in:
 $ py -3 -m venv venv 
 $ venv\Scripts\activate
 $ pip install Flask
 
-#!Before start on MacOS/Linux!
+# !Before start on MacOS/Linux!
 Go to Back-end directory in cmd and type in:
 $ python3 -m venv venv
 $ . venv/bin/activate
 $ pip install Flask
 
-#!If Vue isn't downloaded then!
+# !If Vue isn't downloaded then!
 npm install -g @vue/cli
-## OR
+ OR
 yarn global add @vue/cli
 
 To run: $flask --app main run
