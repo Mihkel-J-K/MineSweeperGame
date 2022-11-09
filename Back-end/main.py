@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
@@ -9,3 +9,7 @@ def hello_world():
 @app.route('/')
 def index():
     return 'Index Page'
+
+@app.route('/mihkelTest/<int:post_id>')
+def getTested(post_id):
+    return render_template('mihkelTest.html')
