@@ -10,6 +10,8 @@ def hello_world():
 def index():
     return 'Index Page'
 
+class Row()
 @app.route('/mihkelTest/<int:post_id>')
 def getTested(post_id):
-    return render_template('mihkelTest.html')
+    rows = [{ 'message': 'Foo' }, { 'message': 'Bar' }]
+    return render_template('mihkelTest.html', rows=rows)
