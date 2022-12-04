@@ -8,9 +8,13 @@ def hello_world():
 
 @app.route('/')
 def index():
-    return 'Index Page'
+    return render_template('titleScreen.html')
 
-class Row()
+class Row:
+
+    def __init__(self):
+        self.row
+
 @app.route('/mihkelTest/<int:post_id>')
 def getTested(post_id):
     rows = [{ 'message': 'Foo' }, { 'message': 'Bar' }]
