@@ -8,30 +8,123 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   </head>
   <body>
-    <div style="text-align: center">
-      <h1>{{ name }}</h1> by {{ author }}
-      <i>{{ description }}</i>
+    <div class="outer-line">
+      <div class="center" id="app">
 
-      <div id="app">
-        <!--
-          NOTE: The Vue CLI will strip away any template interpolation a.k.a. the handle bars/double curly braces, so we bind with `v-html`
-        -->
-        <span v-html="message"></span>
-      </div>
+        <h1>Gedo</h1>
+        <table class="matrix">
+          {% for row in matrix %}
+          <tr>
+            {% for value in row %}
+            <td>
+              <!-- <p>#{{ loop.index }}</p> -->
+              <button class="matrix-{{value}}" @onclick="returnPressed(0, #{{ loop.index }})">{{value}}</button>
+            </td>
+            {% endfor %}
+          </tr>
+          {% endfor %}
+        </table>
+      </div>  
     </div>
 
 
     <script>
       var app = new Vue({
         el: '#app',
-        data: {
-          author: 'Mihkel',
-          message: 'Hello {{ author }} !',
-        },
-        created: function () {
-          console.log('{{ extra }}')
+        methods: {
+          returnPressed: function(i, j) {
+            console.log(i, j);
+          }
+          },
         }
-      })
+      )
     </script>
   </body>
+
+  <style>
+  html,
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      background-color: rgb(188, 4, 4);
+      position: absolute;
+      text-align: center;
+      object-position: center;
+      height: 100vh;
+      width: 100vw;
+    }
+
+  .outer-line {
+      background-color: black;
+      color: white;
+      position: absolute;
+      top: 1rem;
+      left: 1rem; 
+      right: 1rem;
+      bottom: 1rem;
+      background: black;
+      z-index: 1;
+      align-items: center;
+    }
+
+    .center {
+      position: relative;
+      top: 25%;
+    }
+
+    .matrix {
+      background-color: rgb(48, 48, 48);
+      margin-left: auto;
+      margin-right: auto;
+      width: 1rem;
+      height: 1rem;
+    }
+
+    .matrix-0 {
+      margin: 0;
+      background-color: grey;
+      color: rgba(0,0,0,0);
+    }
+
+    .matrix-1 {
+      background-color: aqua;
+    }
+
+    .matrix-2 {
+      background-color: aqua;
+    }
+
+    .matrix-3 {
+      background-color: aqua;
+    }
+
+    .matrix-4 {
+      background-color: aqua;
+    }
+
+    .matrix-5 {
+      background-color: violet;
+    }
+
+    .matrix-6 {
+      background-color: lavender;
+    }
+
+    .matrix-7 {
+      background-color: aqua;
+    }
+
+    .matrix-8 {
+      background-color:  darkorange;
+    }
+
+    .matrix- {
+      background-color: rgb(83, 83, 83);
+    }
+    </style>
 </html>

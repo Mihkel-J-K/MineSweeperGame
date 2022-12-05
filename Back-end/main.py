@@ -1,4 +1,5 @@
 from flask import Flask, render_template
+import random
 
 app = Flask(__name__)
 
@@ -10,12 +11,12 @@ def hello_world():
 def index():
     return render_template('titleScreen.html')
 
-class Row:
+@app.route('/mihkelTest')
+def getTested():
+    rows = []
+    for i in range(25):
+        rows += [[]]
+        for j in range(25):
+            rows[i] += [random.randint(0,8)]
 
-    def __init__(self):
-        self.row
-
-@app.route('/mihkelTest/<int:post_id>')
-def getTested(post_id):
-    rows = [{ 'message': 'Foo' }, { 'message': 'Bar' }]
-    return render_template('mihkelTest.html', rows=rows)
+    return render_template('mihkelTest.html', matrix=rows)

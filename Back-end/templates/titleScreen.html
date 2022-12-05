@@ -6,19 +6,17 @@
     <title>MineSweeper Game</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <link rel="stylesheet" href="">
   </head>
   <body>
-    <div style="text-align: center">
-      <h1>{{ name }}</h1> by {{ author }}
-      <i>{{ description }}</i>
-
-      <div id="app">
-        <!--
-          NOTE: The Vue CLI will strip away any template interpolation a.k.a. the handle bars/double curly braces, so we bind with `v-html`
-        -->
-        <span v-html="message"></span>
-      </div>
+    <div class="outer-line">
+      <div class="center" id="app">
+        <h1>WELCOME TO...</h1>
+        <h2>MINESWEEPER</h2>
+        <button v-if="buttonClicks === 0" @click="buttonClick">ENTER AT YOUR OWN DISCRETION</button>
+        <button v-if="buttonClicks === 1" @click="buttonClick">ARE YOU SURE?</button>
+        <button v-if="buttonClicks === 2" @click="buttonClick">REAAALY?</button>
+        <button v-if="buttonClicks === 3" @click="redirect">ok, it's just minesweeper</button>
+      </div>  
     </div>
 
 
@@ -26,13 +24,79 @@
       var app = new Vue({
         el: '#app',
         data: {
-          author: 'Mihkel',
-          message: 'Hello {{ author }} !',
+          buttonClicks: 0,
         },
-        created: function () {
-          console.log('{{ extra }}')
-        }
+        methods:{
+          buttonClick () {
+            this.buttonClicks += 1;
+          },
+          redirect () {
+            window.location = "/mihkelTest"
+          }
+        },
       })
     </script>
   </body>
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      background-color: rgb(188, 4, 4);
+      position: absolute;
+      text-align: center;
+      height: 100vh;
+      width: 100vw;
+    }
+
+  .outer-line {
+      background-color: black;
+      color: white;
+      position: absolute;
+      top: 1rem;
+      left: 1rem; 
+      right: 1rem;
+      bottom: 1rem;
+      background: black;
+      z-index: 1;
+    }
+
+    .center {
+      position: relative;
+      top: 25%;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    h2 {
+      font-size: 5rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    button {
+      z-index: 2;
+      background-color:rgb(188, 4, 4);
+      margin: 4rem;
+      padding: 2rem;
+      border-style: solid;
+
+      border-width: 1rem;
+      border-color: rgb(99, 0, 0);
+      font-size: 2rem;
+    }
+
+    button:hover{
+      background-color: rgb(144, 0, 0);
+    }
+  </style>
 </html>
