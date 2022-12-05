@@ -11,12 +11,29 @@ def hello_world():
 def index():
     return render_template('titleScreen.html')
 
-@app.route('/mihkelTest')
-def getTested():
-    rows = []
-    for i in range(25):
-        rows += [[]]
-        for j in range(25):
-            rows[i] += [random.randint(0,8)]
 
-    return render_template('mihkelTest.html', matrix=rows)
+rows = []
+for i in range(25):
+    rows += [[]]
+    for j in range(25):
+        rows[i] += [random.randint(0,8)]
+
+empty_rows = []
+for i in range(25):
+    empty_rows += [[]]
+    for j in range(25):
+        empty_rows[i] += [False]
+
+@app.route('/theGame')
+def Main():
+    return render_template('theGame.html', matrix=empty_rows)
+
+@app.route('/theGame/<int:index_i>/<int:index_j>')
+def getTested(index_i, index_j):
+    empty_rows[index_i][index_j] = rows[index_i][index_j]
+    return render_template('theGame.html', matrix=empty_rows)
+
+# @app.route('/theGame/<int:index_i>/<int:index_j>')
+# def method_name(index_i, index_j):
+#     print("LOCO")
+#     pass

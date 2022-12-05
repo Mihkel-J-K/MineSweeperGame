@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{{ name }}</title>
+    <title>MineSweeper!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   </head>
@@ -11,14 +11,15 @@
     <div class="outer-line">
       <div class="center" id="app">
 
-        <h1>Gedo</h1>
         <table class="matrix">
           {% for row in matrix %}
+          {% set outer_loop = loop %}
           <tr>
             {% for value in row %}
             <td>
               <!-- <p>#{{ loop.index }}</p> -->
-              <button class="matrix-{{value}}" @onclick="returnPressed(0, #{{ loop.index }})">{{value}}</button>
+              <button v-if="!{{value}}" class="matrix-0" @click="returnPressed({{ outer_loop.index }}, {{ loop.index }})">0</button>
+              <button v-else class="matrix-{{value}}" disabled>{{value}}</button>
             </td>
             {% endfor %}
           </tr>
@@ -31,9 +32,14 @@
     <script>
       var app = new Vue({
         el: '#app',
+        data: {
+          name: "The Game",
+        },
         methods: {
-          returnPressed: function(i, j) {
-            console.log(i, j);
+          returnPressed:async function(i, j) {
+            i--;
+            j--;
+            await window.location.replace("/theGame/" + i.toString() + '/' + j.toString());
           }
           },
         }
@@ -57,6 +63,7 @@
       object-position: center;
       height: 100vh;
       width: 100vw;
+      font-family: ;
     }
 
   .outer-line {
@@ -85,6 +92,11 @@
       height: 1rem;
     }
 
+    button {
+      margin:0;
+      color: rgba(0,0,0,100);
+    }
+
     .matrix-0 {
       margin: 0;
       background-color: grey;
@@ -92,6 +104,7 @@
     }
 
     .matrix-1 {
+      margin: 0;
       background-color: aqua;
     }
 
