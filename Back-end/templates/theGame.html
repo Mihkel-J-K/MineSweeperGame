@@ -6,11 +6,101 @@
     <title>MineSweeper!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        html,
+        body {
+          margin: 0;
+          padding: 0;
+        }
+        * {
+          box-sizing: border-box;
+        }
+        body {
+          background-color: rgb(188, 4, 4);
+          position: absolute;
+          text-align: center;
+          object-position: center;
+          height: 100vh;
+          width: 100vw;
+          font-family: ;
+        }
+    
+      .outer-line {
+          background-color: black;
+          color: white;
+          position: absolute;
+          top: 1rem;
+          left: 1rem; 
+          right: 1rem;
+          bottom: 1rem;
+          background: black;
+          z-index: 1;
+          align-items: center;
+        }
+    
+        .center {
+          position: relative;
+          top: 25%;
+        }
+    
+        .matrix {
+          background-color: rgb(48, 48, 48);
+          margin-left: auto;
+          margin-right: auto;
+          width: 1rem;
+          height: 1rem;
+        }
+    
+        button {
+          margin:0;
+          color: rgba(0,0,0,100);
+        }
+    
+        .matrix-0 {
+          background-color: grey;
+          color: rgba(0,0,0,0);
+        }
+    
+        .matrix-1 {
+          background-color: rgb(255, 219, 135);
+        }
+    
+        .matrix-2 {
+          background-color: rgb(255, 180, 82);
+        }
+    
+        .matrix-3 {
+          background-color: rgb(253, 146, 74);
+        }
+    
+        .matrix-4 {
+          background-color: rgb(253, 116, 74);
+        }
+    
+        .matrix-5 {
+          background-color: rgb(249, 88, 60);
+        }
+    
+        .matrix-6 {
+          background-color: rgb(249, 69, 60);
+        }
+    
+        .matrix-7 {
+          background-color: rgb(255, 54, 43);
+        }
+    
+        .matrix-8 {
+          background-color:  rgb(255, 13, 0);
+        }
+    
+        .matrix- {
+          background-color: rgb(83, 83, 83);
+        }
+        </style>
   </head>
   <body>
     <div class="outer-line">
       <div class="center" id="app">
-
         <table class="matrix">
           {% for row in matrix %}
           {% set outer_loop = loop %}
@@ -18,13 +108,14 @@
             {% for value in row %}
             <td>
               <!-- <p>#{{ loop.index }}</p> -->
-              <button v-if="!{{value}}" class="matrix-0" @click="returnPressed({{ outer_loop.index }}, {{ loop.index }})">0</button>
+              <button v-if="{{value}} === 8" class="matrix-0" @click="returnPressed({{ outer_loop.index }}, {{ loop.index }})">0</button>
               <button v-else class="matrix-{{value}}" disabled>{{value}}</button>
             </td>
             {% endfor %}
           </tr>
           {% endfor %}
         </table>
+        <button class="refresh" @click="refresh">Refresh</button>
       </div>  
     </div>
 
@@ -36,108 +127,17 @@
           name: "The Game",
         },
         methods: {
-          returnPressed:async function(i, j) {
+          returnPressed: async function(i, j) {
             i--;
             j--;
-            await window.location.replace("/theGame/" + i.toString() + '/' + j.toString());
+            window.location.replace("/theGame/" + i.toString() + '/' + j.toString());
+          },
+          refresh: function() {
+            window.location.replace("/theGame");
           }
           },
         }
       )
     </script>
   </body>
-
-  <style>
-  html,
-    body {
-      margin: 0;
-      padding: 0;
-    }
-    * {
-      box-sizing: border-box;
-    }
-    body {
-      background-color: rgb(188, 4, 4);
-      position: absolute;
-      text-align: center;
-      object-position: center;
-      height: 100vh;
-      width: 100vw;
-      font-family: ;
-    }
-
-  .outer-line {
-      background-color: black;
-      color: white;
-      position: absolute;
-      top: 1rem;
-      left: 1rem; 
-      right: 1rem;
-      bottom: 1rem;
-      background: black;
-      z-index: 1;
-      align-items: center;
-    }
-
-    .center {
-      position: relative;
-      top: 25%;
-    }
-
-    .matrix {
-      background-color: rgb(48, 48, 48);
-      margin-left: auto;
-      margin-right: auto;
-      width: 1rem;
-      height: 1rem;
-    }
-
-    button {
-      margin:0;
-      color: rgba(0,0,0,100);
-    }
-
-    .matrix-0 {
-      margin: 0;
-      background-color: grey;
-      color: rgba(0,0,0,0);
-    }
-
-    .matrix-1 {
-      margin: 0;
-      background-color: aqua;
-    }
-
-    .matrix-2 {
-      background-color: aqua;
-    }
-
-    .matrix-3 {
-      background-color: aqua;
-    }
-
-    .matrix-4 {
-      background-color: aqua;
-    }
-
-    .matrix-5 {
-      background-color: violet;
-    }
-
-    .matrix-6 {
-      background-color: lavender;
-    }
-
-    .matrix-7 {
-      background-color: aqua;
-    }
-
-    .matrix-8 {
-      background-color:  darkorange;
-    }
-
-    .matrix- {
-      background-color: rgb(83, 83, 83);
-    }
-    </style>
 </html>

@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 import random
+from mänguväli import *
 
 app = Flask(__name__)
 
@@ -12,26 +13,22 @@ def index():
     return render_template('titleScreen.html')
 
 
-rows = []
-for i in range(25):
-    rows += [[]]
-    for j in range(25):
-        rows[i] += [random.randint(0,8)]
-
-empty_rows = []
-for i in range(25):
-    empty_rows += [[]]
-    for j in range(25):
-        empty_rows[i] += [False]
-
 @app.route('/theGame')
 def Main():
-    return render_template('theGame.html', matrix=empty_rows)
+    global mänguväli
+    global kaetudMänguväli
+    mänguväli = genereeri_mänguväli(30, 30, 150)
+    kaetudMänguväli = genereeri_mänguväli(30, 30, 0, '8')
+    return render_template('theGame.html', matrix=kaetudMänguväli)
 
 @app.route('/theGame/<int:index_i>/<int:index_j>')
-def getTested(index_i, index_j):
-    empty_rows[index_i][index_j] = rows[index_i][index_j]
-    return render_template('theGame.html', matrix=empty_rows)
+def loading(index_i, index_j):
+    print(index_j, index_i)
+    global kaetudMänguväli
+    global mänguväli
+    kaetudMänguväli = avalda(index_i, index_j, kaetudMänguväli, mänguväli)
+    return render_template('theGame.html', matrix=kaetudMänguväli)
+
 
 # @app.route('/theGame/<int:index_i>/<int:index_j>')
 # def method_name(index_i, index_j):

@@ -16,7 +16,7 @@ def genereeri_mänguväli(laius,kõrgus,miinide_arv,täidis = 0):
     for m in miinid:
         x = m//laius
         y = m%laius
-        miiniväli[x][y] = "¤"
+        miiniväli[x][y] = "9"
         for i in range(max(x-1,0),x+2):
             for j in range(max(y-1,0),y+2):
                 try:
@@ -26,9 +26,11 @@ def genereeri_mänguväli(laius,kõrgus,miinide_arv,täidis = 0):
                     continue
     #printm(miiniväli)
     return miiniväli #{i+j*laius:miiniväli[i][j] for j in range(laius) for i in range(kõrgus)}
+
+
 def avalda(x ,y ,hetkeseis, miiniväli):
-    if miiniväli[x][y] == "¤":
-        return hetkeseis
+    if miiniväli[x][y] == "9":
+        return miiniväli
     elif miiniväli[x][y] != 0:
         hetkeseis[x][y] = miiniväli[x][y]
         return hetkeseis
@@ -36,7 +38,7 @@ def avalda(x ,y ,hetkeseis, miiniväli):
         for i in range(max(x-1,0),x+2):
             for j in range(max(y-1,0),y+2):
                 try:
-                    if hetkeseis[i][j] == "□":
+                    if hetkeseis[i][j] == "8":
                         hetkeseis[i][j] = miiniväli[i][j]
                         hetkeseis = avalda(i,j,hetkeseis,miiniväli)
                 except:
