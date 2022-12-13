@@ -1,5 +1,4 @@
 
 *.xml
 *.pyc
-Back-end/__pycache__/main.cpython-310.pyc
-Back-end/__pycache__/main.cpython-310.pyc
+*/__pycache__/*

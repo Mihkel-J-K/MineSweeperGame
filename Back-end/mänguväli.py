@@ -38,7 +38,7 @@ def avalda(x ,y ,hetkeseis, miiniväli):
         for i in range(max(x-1,0),x+2):
             for j in range(max(y-1,0),y+2):
                 try:
-                    if hetkeseis[i][j] == "8":
+                    if hetkeseis[i][j] == "a":
                         hetkeseis[i][j] = miiniväli[i][j]
                         hetkeseis = avalda(i,j,hetkeseis,miiniväli)
                 except:

@@ -18,7 +18,7 @@ def Main():
     global mänguväli
     global kaetudMänguväli
     mänguväli = genereeri_mänguväli(30, 30, 150)
-    kaetudMänguväli = genereeri_mänguväli(30, 30, 0, '8')
+    kaetudMänguväli = genereeri_mänguväli(30, 30, 0, "a")
     return render_template('theGame.html', matrix=kaetudMänguväli)
 
 @app.route('/theGame/<int:index_i>/<int:index_j>')
@@ -29,8 +29,12 @@ def loading(index_i, index_j):
     kaetudMänguväli = avalda(index_i, index_j, kaetudMänguväli, mänguväli)
     return render_template('theGame.html', matrix=kaetudMänguväli)
 
-
-# @app.route('/theGame/<int:index_i>/<int:index_j>')
-# def method_name(index_i, index_j):
-#     print("LOCO")
-#     pass
+@app.route('/theGame/flag/<int:index_i>/<int:index_j>')
+def flag(index_i, index_j):
+    print(index_j, index_i)
+    global kaetudMänguväli
+    if kaetudMänguväli[index_i][index_j] == 10:
+        kaetudMänguväli[index_i][index_j] = 'a'
+    else:
+        kaetudMänguväli[index_i][index_j] = 10
+    return render_template('theGame.html', matrix=kaetudMänguväli)

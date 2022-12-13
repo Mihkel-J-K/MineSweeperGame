@@ -12,6 +12,9 @@
           margin: 0;
           padding: 0;
         }
+        html {
+          background-color: black;
+        }
         * {
           box-sizing: border-box;
         }
@@ -22,7 +25,6 @@
           object-position: center;
           height: 100vh;
           width: 100vw;
-          font-family: ;
         }
     
       .outer-line {
@@ -57,7 +59,7 @@
         }
     
         .matrix-0 {
-          background-color: grey;
+          background-color: rgb(171, 171, 171);
           color: rgba(0,0,0,0);
         }
     
@@ -92,9 +94,28 @@
         .matrix-8 {
           background-color:  rgb(255, 13, 0);
         }
-    
+
+        .matrix-9 {
+          background-color: rgb(16, 16, 16);
+          color: rgba(0,0,0,0);
+        }
+
+        .matrix-10 {
+          background-color: red;
+          color: rgba(0,0,0,0);
+        }
+
         .matrix- {
-          background-color: rgb(83, 83, 83);
+          background-color: grey;
+          color: rgba(0,0,0,0);
+        }
+
+        .flag-true {
+          background-color: red;
+        }
+
+        .flag-false {
+          background-color: green;
         }
         </style>
   </head>
@@ -102,13 +123,15 @@
     <div class="outer-line">
       <div class="center" id="app">
         <table class="matrix">
+          <button class="flag-{{flagging}}" @click="flagged()">Flag button</button>
           {% for row in matrix %}
           {% set outer_loop = loop %}
           <tr>
             {% for value in row %}
             <td>
               <!-- <p>#{{ loop.index }}</p> -->
-              <button v-if="{{value}} === 8" class="matrix-0" @click="returnPressed({{ outer_loop.index }}, {{ loop.index }})">0</button>
+              <button v-if="{{value}} == a" class="matrix-" @click="returnPressed({{ outer_loop.index }}, {{ loop.index }})">0</button>
+              <button v-else-if="{{value}} == 10" class="matrix-10" @click="returnPressed({{ outer_loop.index }}, {{ loop.index }})">0</button>
               <button v-else class="matrix-{{value}}" disabled>{{value}}</button>
             </td>
             {% endfor %}
@@ -125,12 +148,21 @@
         el: '#app',
         data: {
           name: "The Game",
+          flagging: false,
         },
         methods: {
           returnPressed: async function(i, j) {
             i--;
             j--;
-            window.location.replace("/theGame/" + i.toString() + '/' + j.toString());
+            if (this.flagging) {
+              window.location.replace("/theGame/flag/" + i.toString() + '/' + j.toString());
+            } else {
+              window.location.replace("/theGame/" + i.toString() + '/' + j.toString());
+            }
+          },
+          flagged: function(i, j) {
+            console.log(this.flagging);
+            this.flagging = !this.flagging;
           },
           refresh: function() {
             window.location.replace("/theGame");
