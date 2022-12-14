@@ -38,11 +38,14 @@
           background: black;
           z-index: 1;
           align-items: center;
+          
         }
     
         .center {
-          position: relative;
-          top: 25%;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
         }
     
         .matrix {
@@ -110,12 +113,18 @@
           color: rgba(0,0,0,0);
         }
 
-        .flag-true {
-          background-color: red;
+        .reset-and-flag {
+          background-color:rgb(188, 4, 4);
+          padding: 0.5rem;
+          border-style: solid;
+          margin: 1rem;
+          border-width: 0.5rem;
+          border-color: rgb(99, 0, 0);
+          font-size: 1rem;
         }
 
-        .flag-false {
-          background-color: green;
+        .reset-and-flag:hover{
+          background-color: rgb(144, 0, 0);
         }
         </style>
   </head>
@@ -123,7 +132,7 @@
     <div class="outer-line">
       <div class="center" id="app">
         <table class="matrix">
-          <button class="flag-{{flagging}}" @click="flagged()">Flag button</button>
+          <button class="reset-and-flag" @click="flagged()">Flag button</button>
           {% for row in matrix %}
           {% set outer_loop = loop %}
           <tr>
@@ -138,7 +147,7 @@
           </tr>
           {% endfor %}
         </table>
-        <button class="refresh" @click="refresh">Refresh</button>
+        <button class="reset-and-flag" @click="refresh">Refresh</button>
       </div>  
     </div>
 
@@ -161,8 +170,13 @@
             }
           },
           flagged: function(i, j) {
-            console.log(this.flagging);
-            this.flagging = !this.flagging;
+            if (this.flagging === true) {
+              this.flagging = false;
+              document.body.style.background = 'rgb(188, 4, 4)';
+            } else {
+              document.body.style.background = 'blue';
+              this.flagging = true;
+            }
           },
           refresh: function() {
             window.location.replace("/theGame");
