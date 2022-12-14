@@ -15,6 +15,6 @@ npm install -g @vue/cli  \
 OR \
 yarn global add @vue/cli
 
-## first run venv activate script and then:
+## first run venv scripts activate and then:
 -To run: $flask --app main run     \
 -Debug mode: $flask --app main --debug run
